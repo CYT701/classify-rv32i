@@ -31,7 +31,25 @@ argmax:
     li t2, 1
 loop_start:
     # TODO: Add your own implementation
+    bge t2, a1, end_loop  
+    slli t5, t2, 2
+    add t4, t5, a0
+    lw t3, 0(t4) 
+    bgt t3, t0, update_max
+    addi t2, t2, 1
+    j loop_start
+
+update_max:
+    mv t0, t3   # record the max value
+    mv t1, t2   # record the max value position
+    addi t2, t2, 1
+    j  loop_start
+
+end_loop:
+    mv a0, t1
+    ret
 
 handle_error:
     li a0, 36
     j exit
+
