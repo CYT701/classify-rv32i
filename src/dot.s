@@ -41,7 +41,6 @@ loop_start:
     li t5, 0    # stride 1
     lw t2, 0(a0)
     lw t3, 0(a1)
-
     bge t3, zero, mul_dot
     sub t3, zero, t3
     sub t2, zero, t2
@@ -50,6 +49,7 @@ mul_dot:
     add t0, t0, t2
     addi t3, t3, -1
     bgt t3, zero, mul_dot 
+
 #    li t6, 0
 #    mul t6, t2, t3
 #    add t0, t0, t6
