@@ -2,24 +2,16 @@
 contributed by < [`陳彥廷`](https://github.com/CYT701/ComputerArchitecture2024) >
 
 ## Artificial Neural Network (ANN)
-
-![image](https://hackmd.io/_uploads/HJwugdmlyg.png)
-
 An **artificial neural network** is an interconnected group of nodes, inspired by a simplification of neurons in a brain. Here, each circular node represents an artificial neuron and an arrow represents a connection from the output of one artificial neuron to the input of another.
-
 
 ### ReLU (Rectified Linear Unit)
 #### Activation Function
-
 The Activation Function standardizes the calculated input by regulating its "range of output values" and the "relationship between output values".
 
 #### ReLU
-![image](https://hackmd.io/_uploads/SkHrC5Ng1x.png)
 The mathematical expression for ReLU is:
 
-\begin{equation}
 f(x) = max(0, x)
-\end{equation}
 
 ***Characteristics of ReLU:***
 1. **Non-linearity:** Despite its simple formula, ReLU is a nonlinear function. This nonlinearity allows neural networks to learn and represent complex relationships, which is one reason for their powerful capabilities.
@@ -34,9 +26,7 @@ f(x) = max(0, x)
 ArgMax is a common mathematical operation used to find the position (index) where a function or sequence reaches its maximum value, rather than the value itself. In simple terms, ArgMax returns the input that gives the highest output of a function. 
 For example, for the sequence [2, 5, 1, 8, 3]:
 
-\begin{equation}
 ArgMax([2, 5, 1, 8, 3]) = 4
-\end{equation}
 
 because the value `8`, which is the maximum, is at index `4`. So, ArgMax returns `4`, the index, not the maximum value itself.
 
@@ -81,10 +71,9 @@ This is a neural network-based classifier that uses matrix operations to compute
 ## Challenges
 ### Dot Product
 At first, when implementing the dot function, my initial idea was to replace all the multiplications with additions. Following this approach, there are three places where multiplication is required: the dot product operation and handling the strides of the first and second input matrices. However, using accumulation for these operations would result in poor efficiency. Therefore, when dealing with strides, I used additional registers to directly multiply the stride of each matrix by 4 (left-shifting by 2 bits) during each loop iteration and added the result back to the pointer referencing the matrix elements. This approach effectively calculates the offset directly, saving the accumulation required for stride computation and improving the efficiency of the code.
-:::danger
+
 **FIXME: Can pass all the test cases in `test_dot`, but an error occurs in `classify_3` when testing `test_classify`.**
-:::
-:::warning
+
 In the following code, I use an accumulation method to compute the dot product. The register `t0` is used to store the result of the dot product, while `t2` and `t3` respectively store the two numbers to be multiplied. A loop is used to repeatedly add the value in `t2` to `t0` and decrement `t3` by one. The loop terminates when `t3` is less than or equal to zero.
 This causes error in `classify_3`
 ```cpp!
@@ -100,7 +89,7 @@ mul_dot:
     mul t6, t2, t3
     add t0, t0, t6
 ```
-:::
+
 ### Matrix Multiplication
 In this code, the first problem I encountered was that it used many registers and relied on the stack to store some values that did not need to be modified. As a result, I spent a considerable amount of time understanding the code.
 ## References
