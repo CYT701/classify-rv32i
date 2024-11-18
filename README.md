@@ -89,7 +89,18 @@ mul_dot:
     mul t6, t2, t3
     add t0, t0, t6
 ```
+Due to persistent bugs when using accumulation to compute the dot product, and despite my inability to pinpoint the logical errors, I decided, upon a classmate's suggestion, to implement multiplication using an adder, as taught in our computer organization course.
+```cpp!
+check_bit:
+    andi t6, t3, 1      
+    beqz t6, skip_add   
+    add t0, t0, t2       
 
+skip_add:
+    slli t2, t2, 1      
+    srli t3, t3, 1     
+    bnez t3, check_bit 
+```
 ### Matrix Multiplication
 In this code, the first problem I encountered was that it used many registers and relied on the stack to store some values that did not need to be modified. As a result, I spent a considerable amount of time understanding the code.
 ## References

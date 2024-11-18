@@ -168,6 +168,9 @@ classify:
     lw t1, 0(s8)
     # mul a0, t0, t1
     li a0, 0
+    bge t1, zero, mul
+    sub t0, zero, t0
+    sub t1, zero, t1
 mul:
     add a0, a0, t0
     addi t1, t1, -1
@@ -211,6 +214,9 @@ mul:
     lw t1, 0(s8)
     # mul a1, t0, t1 # length of h array and set it as second argument
     li a1, 0
+    bge t1, zero, mul2
+    sub t0, zero, t0
+    sub t1, zero, t1
 mul2:
     add a1, a1, t0
     addi t1, t1, -1
@@ -239,6 +245,9 @@ mul2:
     lw t1, 0(s6)
     # mul a0, t0, t1 
     li a0, 0
+    bge t1, zero, mul3
+    sub t0, zero, t0
+    sub t1, zero, t1
 mul3:
     add a0, a0, t0
     addi t1, t1, -1
@@ -305,6 +314,9 @@ mul3:
     lw t1, 0(s6)
     # mul a1, t0, t1 # load length of array into second arg
     li a1, 0
+    bge t1, zero, mul4
+    sub t0, zero, t0
+    sub t1, zero, t1
 mul4:
     add a1, a1, t0
     addi t1, t1, -1

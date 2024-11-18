@@ -41,26 +41,38 @@ loop_start:
     li t5, 0    # stride 1
     lw t2, 0(a0)
     lw t3, 0(a1)
-    bge t3, zero, mul_dot
-    sub t3, zero, t3
-    sub t2, zero, t2
 
-mul_dot:
+check_bit:
+    andi t6, t3, 1      
+    beqz t6, skip_add   
+    add t0, t0, t2       
+
+skip_add:
+    slli t2, t2, 1      
+    srli t3, t3, 1     
+    bnez t3, check_bit   
+
+#    bge t3, zero, mul_dot
+#    sub t3, zero, t3
+#    sub t2, zero, t2
+
+#mul_dot:
 #    add t0, t0, t2
 #    addi t3, t3, -1
-#    bgt t3, zero, mul_dot 
+#    bgt t3, zero, mul_dot
 
-    li t6, 0
-    mul t6, t2, t3
-    add t0, t0, t6
+#    li t6, 0
+#    mul t6, t2, t3
+#    add t0, t0, t6
 
 
     add t4, t4, a3
     slli t4, t4, 2
     add a0, a0, t4
-    add t5, t5, a4
-    slli t5, t5, 2
-    add a1, a1, t5
+    li t4, 0
+    add t4, t4, a4
+    slli t4, t4, 2
+    add a1, a1, t4
     addi t1, t1, 1
     j loop_start
 
