@@ -46,13 +46,13 @@ loop_start:
     sub t2, zero, t2
 
 mul_dot:
-    add t0, t0, t2
-    addi t3, t3, -1
-    bgt t3, zero, mul_dot 
+#    add t0, t0, t2
+#    addi t3, t3, -1
+#    bgt t3, zero, mul_dot 
 
-#    li t6, 0
-#    mul t6, t2, t3
-#    add t0, t0, t6
+    li t6, 0
+    mul t6, t2, t3
+    add t0, t0, t6
 
 
     add t4, t4, a3
